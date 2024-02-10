@@ -10,3 +10,11 @@ services:                          # 실행할 컨테이너들을 정의
       - /usr/src/app/node_modules # node_modules 디렉토리는 컨테이너에 복사하지 않음
       - ./:/usr/src/app           # 현재 디렉토리를 컨테이너의 /usr/src/app 디렉토리에 마운트
     stdin_open: true              # 컨테이너가 실행되면 표준 입력을 열어줌
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    command: ["npm", "run", "test"]
